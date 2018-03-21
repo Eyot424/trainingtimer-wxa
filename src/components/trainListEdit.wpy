@@ -1,0 +1,48 @@
+<style lang="less">
+
+</style>
+
+<template>
+  <view class="counter">
+    <view class="counterview">
+      <counter @index-emit.user="counterEmit" />
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Counter from 'counter' // alias example
+
+  components = {
+    counter: Counter
+  }
+
+  export default class TrainListEdit extends wepy.component {
+    props = {
+      num: {
+        type: [Number, String],
+        coerce: function (v) {
+          return +v
+        },
+        default: 50
+      }
+    }
+
+    data = {
+    }
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    methods = {
+      counterEmit (...args) {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+  }
+</script>
